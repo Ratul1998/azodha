@@ -38,17 +38,36 @@ class _TodoWidget extends StatelessWidget {
             return Center(child: Text(state.error!));
           }
 
-          return ListView.builder(
-            itemCount: state.todos.length,
-            itemBuilder: (_, index) {
-              final todo = state.todos[index];
-              return _TodoTitleWidget(
-                title: todo.title,
-                completed: todo.completed,
-                onChanged: (val) => cubit.toggleTask(todo),
-                onDelete: () => cubit.deleteTask(todo.id),
-              );
-            },
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SearchBar(
+                  onChanged: cubit.search,
+                  hintText: 'Search tasks',
+                  shape: WidgetStatePropertyAll(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadiusGeometry.circular(4),
+                    ),
+                  ),
+                  elevation: WidgetStatePropertyAll(0),
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: state.filtered.length,
+                  itemBuilder: (_, index) {
+                    final todo = state.filtered[index];
+                    return _TodoTitleWidget(
+                      title: todo.title,
+                      completed: todo.completed,
+                      onChanged: (val) => cubit.toggleTask(todo),
+                      onDelete: () => cubit.deleteTask(todo.id),
+                    );
+                  },
+                ),
+              ),
+            ],
           );
         },
       ),

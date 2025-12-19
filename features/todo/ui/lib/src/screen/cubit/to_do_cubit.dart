@@ -21,6 +21,8 @@ class TodoCubit extends Cubit<TodoState> {
     );
   }
 
+  void refresh() => _interactor.refreshTodos();
+
   Future<void> addTask(String title) async {
     final optimisticTodo = AddToDoModel(title: title);
 

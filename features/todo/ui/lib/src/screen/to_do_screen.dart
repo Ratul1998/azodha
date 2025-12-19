@@ -54,17 +54,20 @@ class _TodoWidget extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: ListView.builder(
-                  itemCount: state.filtered.length,
-                  itemBuilder: (_, index) {
-                    final todo = state.filtered[index];
-                    return _TodoTitleWidget(
-                      title: todo.title,
-                      completed: todo.completed,
-                      onChanged: (val) => cubit.toggleTask(todo),
-                      onDelete: () => cubit.deleteTask(todo.id),
-                    );
-                  },
+                child: RefreshIndicator(
+                  child: ListView.builder(
+                    itemCount: state.filtered.length,
+                    itemBuilder: (_, index) {
+                      final todo = state.filtered[index];
+                      return _TodoTitleWidget(
+                        title: todo.title,
+                        completed: todo.completed,
+                        onChanged: (val) => cubit.toggleTask(todo),
+                        onDelete: () => cubit.deleteTask(todo.id),
+                      );
+                    },
+                  ),
+                  onRefresh: () async => cubit.refresh(),
                 ),
               ),
             ],

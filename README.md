@@ -22,3 +22,6 @@
 ## Challenges
 - Handling optimistic updates
 - Sync conflict resolution
+
+## Demo Video
+[Demo Video](https://github.com/Ratul1998/azodha/blob/master/Screen_recording_20251221_222905.mp4)

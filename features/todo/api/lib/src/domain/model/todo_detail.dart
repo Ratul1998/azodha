@@ -9,6 +9,14 @@ class TodoDetail {
     required this.completed,
   });
 
+  TodoDetail copyWith({int? id, String? title, bool? completed}) {
+    return TodoDetail(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      completed: completed ?? this.completed,
+    );
+  }
+
   Map<String, dynamic> toJson() => {
     'id': id,
     'title': title,

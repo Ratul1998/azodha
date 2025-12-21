@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_api/api.dart';
 import 'package:todo_ui/src/screen/cubit/to_do_state.dart';
@@ -15,7 +16,12 @@ class TodoCubit extends Cubit<TodoState> {
     _interactor.refreshTodos();
 
     _interactor.getTodos().listen(
-      (todos) => emit(state.copyWith(todos: todos, loading: false)),
+      (todos) => emit(
+        state.copyWith(
+          todos: List.from(todos)..sort((a, b) => b.id.compareTo(a.id)),
+          loading: false,
+        ),
+      ),
       onError: (error) =>
           emit(state.copyWith(error: error.toString(), loading: false)),
     );
@@ -30,8 +36,10 @@ class TodoCubit extends Cubit<TodoState> {
 
     try {
       await _interactor.addTodo(optimisticTodo);
-    } catch (_) {
-      loadTasks(); // rollback
+    } on Exception catch (err, str) {
+      debugPrintStack(stackTrace: str, label: err.toString());
+    } finally {
+      _interactor.refreshTodos();
     }
   }
 
@@ -39,7 +47,5 @@ class TodoCubit extends Cubit<TodoState> {
 
   Future<void> deleteTask(int id) => _interactor.deleteTodoModel(id);
 
-  void search(String query) {
-    emit(state.copyWith(query: query));
-  }
+  void search(String query) => emit(state.copyWith(query: query));
 }

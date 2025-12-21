@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:todo_ui/src/screen/cubit/to_do_state.dart';
+import 'package:todo_ui/src/screen/widget/add_todo_dialog.dart';
 
 import 'cubit/to_do_cubit.dart';
 
@@ -24,12 +26,23 @@ class _TodoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<TodoCubit>();
     return Scaffold(
       appBar: AppBar(title: Text('Todos')),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () =>
+            showCupertinoModalPopup<String>(
+              context: context,
+              builder: (context) => AddTodoDialog(),
+            ).then((task) {
+              if (task is String && task.isNotEmpty) {
+                cubit.addTask(task);
+              }
+            }),
+        child: Icon(Icons.add),
+      ),
       body: BlocBuilder<TodoCubit, TodoState>(
         builder: (context, state) {
-          final cubit = context.read<TodoCubit>();
-
           if (state.loading) {
             return const Center(child: CircularProgressIndicator());
           }

@@ -6,8 +6,8 @@
 3. flutter run
 
 ## Assumptions
-- JSONPlaceholder is a mock API
-- Auth is local-only
+- JSONPlaceholder is a mock API for GET data
+- POST/PATCH/DELETE working locally 
 
 ## BLoC Pattern
 - Events trigger actions

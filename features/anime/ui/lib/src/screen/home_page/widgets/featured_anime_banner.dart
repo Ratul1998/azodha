@@ -23,7 +23,7 @@ class FeaturedAnimeBanner extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Colors.black.withOpacity(0.2), Colors.black],
+              colors: [Colors.black.withValues(alpha: 0.2), Colors.black],
             ),
           ),
         ),

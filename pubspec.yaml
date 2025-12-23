@@ -38,6 +38,10 @@ dependencies:
     path: features/todo/impl
   todo_ui:
     path: features/todo/ui
+  anime_impl:
+    path: features/anime/impl
+  anime_ui:
+    path: features/anime/ui
 
 dev_dependencies:
   flutter_test:

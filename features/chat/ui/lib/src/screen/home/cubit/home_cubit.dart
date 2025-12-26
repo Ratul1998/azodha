@@ -18,7 +18,10 @@ class HomeCubit extends Cubit<HomeState> {
             emit(
               HomeStateLoaded(
                 chats: data.last as List<ChatModel>,
-                users: data.first as List<UserModel>,
+                users: [
+                  ...(data.first as List<UserModel>),
+                  ...(data.first as List<UserModel>),
+                ],
               ),
             );
           })

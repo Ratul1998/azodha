@@ -19,7 +19,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Chat',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.indigoAccent)),
+      theme: ThemeData(
+        colorScheme: ColorScheme.of(context).copyWith(surface: Colors.white),
+      ),
       home: const HomeScreen(),
     );
   }

@@ -34,14 +34,10 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
-  todo_impl:
-    path: features/todo/impl
-  todo_ui:
-    path: features/todo/ui
-  anime_impl:
-    path: features/anime/impl
-  anime_ui:
-    path: features/anime/ui
+  chat_impl:
+    path: features/chat/impl
+  chat_ui:
+    path: features/chat/ui
 
 dev_dependencies:
   flutter_test:
